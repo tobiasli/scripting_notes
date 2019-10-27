@@ -1,10 +1,10 @@
 My pypideploy routine:
 
 1) Create proper package files: setup.py (with requires=[]) and .travis.yml
-2) Build package locally and upload to pypi: python setup.py sdist
-3) Upload package to pypi: twine upload dist/*         
-4) Create pypi token for package: https://pypi.org/manage/account/token/
-5) Encrypt token using travis: travis encrypt [token] --add deploy.password
+2) Build package locally and upload to pypi: `python setup.py sdist`
+3) Upload package to pypi: `twine upload dist/*`         
+4) Create pypi token for package: `https://pypi.org/manage/account/token/` 
+5) Encrypt token using travis: `travis encrypt [token] --add deploy.password`
 
 Note: May have to add the following to travis to aid in deploy:
 deploy:
