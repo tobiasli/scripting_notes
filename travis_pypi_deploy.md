@@ -16,7 +16,7 @@ deploy:
 
 Travis yaml example from dateparse-tobiasli:
 .travis.yml
-
+```yaml
 language: python
 dist: xenial
 sudo: false
@@ -42,3 +42,4 @@ deploy:
   on:
     branch: master
   skip_existing: true
+```
