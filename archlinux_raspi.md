@@ -43,8 +43,12 @@ Trenger altså å opprette sd-kort fra REN linux, nytter ikke å gjøre det via 
 
 # 12.12.19 ArcLinux del 5
 Ny plan:
-- [ ] Installere NOOBS på RPI.
-- [ ] Koble minnekortleser til RPI og putte inn ferdig formattert arch-sdkort.
-- [ ] Bruke Noobs (debian) til å laste ned og opprette så må bare laste ned og installere arch på sdkort.
-- [ ] Bytte sdkort og prøve å boote rpi.
-Hæregud.
+- [x] Installere NOOBS på RPI.
+- [x] Koble minnekortleser til RPI og putte inn ferdig formattert arch-sdkort.
+- [x] Bruke Noobs (debian) til å laste ned og opprette så må bare laste ned og installere arch på sdkort.
+Funker ikke. Installasjonen får feilmeldinger ang "cannot create symbolic link".
+- [x] Prøver å se om jeg har feil filsystem.
+Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.
+- [ ] Kjøpe nytt sd-kort.
+- [ ] Med heeeeelt nytt sd-kort, følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
+- [ ] Begynne å gråte (om det så funker eller ikke).
