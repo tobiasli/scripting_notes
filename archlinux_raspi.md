@@ -57,3 +57,13 @@ Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.\:
 - [ ] Koble den opp til Raspbian på rpi.
 - [ ] Følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
 - [ ] Begynne å gråte (om det så funker eller ikke).
+
+UTROLIG TRIKS:
+Hvis et SD-kort er konka med skrivebeskyttelse ser det ut til at man kan redde det:
+1. Laste ned guiformat.exe
+2. Åpne guiformat.exe
+3. Åpne Task Manager,
+4. Steng Windows Explorer (Utforsker)
+5. Formater diskene.
+6. I Task Manager. Fil, Ny, explorer.exe
+7. PROFIT.
