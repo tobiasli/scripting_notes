@@ -53,10 +53,18 @@ Funker ikke. Installasjonen får feilmeldinger ang "cannot create symbolic link"
 Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.\:
 
 ### Ny plan:
-- [ ] Kjøpe nytt sd-kort.
-- [ ] Koble den opp til Raspbian på rpi.
-- [ ] Følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
-- [ ] Begynne å gråte (om det så funker eller ikke).
+~~- [ ] Kjøpe nytt sd-kort.~~
+Trengte ikke, klarte å redde det kortet jeg hadde.
+- [x] Koble den opp til Raspbian på rpi.
+- [x] Følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
+Er i gang. Installerte bsdtar for å pakke ut, og jeg tror den holder på å pakke ut nå. Jeg går og legger meg, så sjekker jeg imorgen.
+Jeg trenger et nytt sd-kort, antakeligvis.
+- [x] Begynne å gråte (om det så funker eller ikke).
+
+# Ny plan
+Verifisere eksisterende sd-kort
+- [ ] Installere noobs på den, og se om raspberry pi can boote fra den.
+
 
 UTROLIG TRIKS:
 Hvis et SD-kort er konka med skrivebeskyttelse ser det ut til at man kan redde det:
