@@ -34,7 +34,17 @@ Det er jævlig vanskelig å installere linux.
 Og, jeg har fått tenkt litt.
 
 Jeg må bruke et annet, enklere Linux for VM. ArchLinux er for stress. Jeg trenger noe som funker ut av boksen.
-- [ ] Slette alt eksisterende for nåværende VM.
-- [ ] Opprette ny VM med en enklere distro (Ubuntu).
-- [ ] Formattering av SD-kort skal allerede være løst i DiskPart.
+- [x] Slette alt eksisterende for nåværende VM.
+- [x] Opprette ny VM med en enklere distro (Ubuntu).
+- [x] Formattering av SD-kort skal allerede være løst i DiskPart.
 - [ ] Plan: Følge [oppskriften](https://www.instructables.com/id/Arch-Linux-on-Raspberry-Pi/)
+Mother fucker. Linux VM har ikke ren linux skriving til SD-kort, så symbolske lenker feiler.
+Trenger altså å opprette sd-kort fra REN linux, nytter ikke å gjøre det via windows.
+
+# 12.12.19 ArcLinux del 5
+Ny plan:
+- [ ] Installere NOOBS på RPI.
+- [ ] Koble minnekortleser til RPI og putte inn ferdig formattert arch-sdkort.
+- [ ] Bruke Noobs (debian) til å laste ned og opprette så må bare laste ned og installere arch på sdkort.
+- [ ] Bytte sdkort og prøve å boote rpi.
+Hæregud.
