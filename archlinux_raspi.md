@@ -37,8 +37,10 @@ Jeg må bruke et annet, enklere Linux for VM. ArchLinux er for stress. Jeg treng
 - [x] Slette alt eksisterende for nåværende VM.
 - [x] Opprette ny VM med en enklere distro (Ubuntu).
 - [x] Formattering av SD-kort skal allerede være løst i DiskPart.
-- [ ] Plan: Følge [oppskriften](https://www.instructables.com/id/Arch-Linux-on-Raspberry-Pi/)
-Mother fucker. Linux VM har ikke ren linux skriving til SD-kort, så symbolske lenker feiler.
+- [x] Plan: Følge [oppskriften](https://www.instructables.com/id/Arch-Linux-on-Raspberry-Pi/)
+
+**Mother fucker**
+Linux VM har ikke ren linux skriving til SD-kort, så symbolske lenker feiler.
 Trenger altså å opprette sd-kort fra REN linux, nytter ikke å gjøre det via windows.
 
 # 12.12.19 ArcLinux del 5
@@ -48,7 +50,10 @@ Ny plan:
 - [x] Bruke Noobs (debian) til å laste ned og opprette så må bare laste ned og installere arch på sdkort.
 Funker ikke. Installasjonen får feilmeldinger ang "cannot create symbolic link".
 - [x] Prøver å se om jeg har feil filsystem.
-Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.
+Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.\:
+
+### Ny plan:
 - [ ] Kjøpe nytt sd-kort.
-- [ ] Med heeeeelt nytt sd-kort, følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
+- [ ] Koble den opp til Raspbian på rpi.
+- [ ] Følge planen på https://archlinuxarm.org/platforms/armv6/raspberry-pi
 - [ ] Begynne å gråte (om det så funker eller ikke).
