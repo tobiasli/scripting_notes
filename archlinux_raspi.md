@@ -60,6 +60,7 @@ Trengte ikke, klarte å redde det kortet jeg hadde.
 Er i gang. Installerte bsdtar for å pakke ut, og jeg tror den holder på å pakke ut nå. Jeg går og legger meg, så sjekker jeg imorgen.
 Jeg trenger et nytt sd-kort, antakeligvis.
 - [x] Begynne å gråte (om det så funker eller ikke).
+Funker ikke. Booter ikke. RPI klarer ikke finne noe bootbart på disken.
 
 # Ny plan
 Verifisere eksisterende sd-kort
