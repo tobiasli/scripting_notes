@@ -9,8 +9,9 @@
 8) pacman-key --populate archlinuxarm
 9) pacman -Syu
 
-# pacman-key --populate archlinuxarm
-
+pacman -S python
+python -m venv shyft
+source shyft/bin/activate
 
 # 09.12.19 ArchLinux
 Jeg vil prøve å kjøre shyft på min RaspberryPi. Her er prosessen.
