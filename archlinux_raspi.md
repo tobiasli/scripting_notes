@@ -1,3 +1,16 @@
+# How to Install ArchLinuxArm on raspberry pi:
+1) Doanload image: https://sourceforge.net/projects/archlinux-rpi2/
+2) Write to sd-card with Win32DiskImager
+3) Stick in Pi and boot.
+4) login as alarm/alarm
+5) su root with root as password
+6) pacman -Syu --ignore ca-certificates-utils
+7) pacman-key --init
+8) pacman-key --populate archlinuxarm
+9) pacman -Syu
+
+# pacman-key --populate archlinuxarm
+
 
 # 09.12.19 ArchLinux
 Jeg vil prøve å kjøre shyft på min RaspberryPi. Her er prosessen.
@@ -64,7 +77,21 @@ Funker ikke. Booter ikke. RPI klarer ikke finne noe bootbart på disken.
 
 # Ny plan
 Verifisere eksisterende sd-kort
-- [ ] Installere noobs på den, og se om raspberry pi can boote fra den.
+- [x] Installere noobs på den, og se om raspberry pi can boote fra den.
+Nope kortet er herpa.
+
+# Ny plan:
+- [x] Nytt kort, følge Arch-oppskrift fra Debian på RPI slavisk.
+Nope funker ikke. Får feilmelding i bsdtar.
+
+# Ny plan:
+Prøve image-varianten på helt nytt sd-kort.
+Lastet ned: https://sourceforge.net/projects/archlinux-rpi2/
+Rullet ut på sd-kort med Win32DiskImager
+- [x] Plugge inn og sjekke om funker.
+
+YEEEESSS!
+
 
 
 UTROLIG TRIKS:
@@ -76,3 +103,6 @@ Hvis et SD-kort er konka med skrivebeskyttelse ser det ut til at man kan redde d
 5. Formater diskene.
 6. I Task Manager. Fil, Ny, explorer.exe
 7. PROFIT.
+
+
+
