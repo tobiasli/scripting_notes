@@ -9,6 +9,12 @@
 8) pacman-key --populate archlinuxarm
 9) pacman -Syu
 
+start stop restart ssh:
+systemctl start sshd
+systemctl status sshd
+systemctl stop sshd
+systemctl restart sshd
+
 pacman -S python
 python -m venv shyft
 source shyft/bin/activate
