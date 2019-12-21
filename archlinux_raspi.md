@@ -9,15 +9,16 @@
 8) pacman-key --populate archlinuxarm
 9) pacman -Syu
 
-start stop restart ssh:
-systemctl start sshd
-systemctl status sshd
-systemctl stop sshd
-systemctl restart sshd
+### start stop restart ssh:
+* `systemctl start sshd`
+* `systemctl status sshd`
+* `systemctl stop sshd`
+* `systemctl restart sshd`
 
-pacman -S python
-python -m venv shyft
-source shyft/bin/activate
+* `pacman -S python`
+* `python -m venv shyft`
+* `source shyft/bin/activate`
+* `pacman -S python-pip`
 
 # 09.12.19 ArchLinux
 Jeg vil prøve å kjøre shyft på min RaspberryPi. Her er prosessen.
@@ -72,7 +73,7 @@ Funker ikke. Installasjonen får feilmeldinger ang "cannot create symbolic link"
 - [x] Prøver å se om jeg har feil filsystem.
 Faen, SD-kortet er herpa. Må kjøpe nytt. Ok ny plan.\:
 
-### Ny plan:
+### Ny plan: 1
 ~~- [ ] Kjøpe nytt sd-kort.~~
 Trengte ikke, klarte å redde det kortet jeg hadde.
 - [x] Koble den opp til Raspbian på rpi.
@@ -82,16 +83,16 @@ Jeg trenger et nytt sd-kort, antakeligvis.
 - [x] Begynne å gråte (om det så funker eller ikke).
 Funker ikke. Booter ikke. RPI klarer ikke finne noe bootbart på disken.
 
-# Ny plan
+# Ny plan 2
 Verifisere eksisterende sd-kort
 - [x] Installere noobs på den, og se om raspberry pi can boote fra den.
 Nope kortet er herpa.
 
-# Ny plan:
+# Ny plan: 3
 - [x] Nytt kort, følge Arch-oppskrift fra Debian på RPI slavisk.
 Nope funker ikke. Får feilmelding i bsdtar.
 
-# Ny plan:
+# Ny plan: 4
 Prøve image-varianten på helt nytt sd-kort.
 Lastet ned: https://sourceforge.net/projects/archlinux-rpi2/
 Rullet ut på sd-kort med Win32DiskImager
@@ -99,7 +100,11 @@ Rullet ut på sd-kort med Win32DiskImager
 
 YEEEESSS!
 
-
+# 21.12.2019 ArchLinux 64
+Det viser seg at jeg har installert ArchLinux 32, istedenfor 64. Så jeg trenger å oppgradere.
+- [ ] Jeg har en fungerende ArchLinux-SD, så jeg prøver med det andre kortet jeg har.
+- [ ] Denne gangen kan jeg følge oppskriften til ArchLinux, og passe på at jeg gjør alt med root-tilgang! Ifølge Andreas skal det gå bra da.
+- [ ] Profit.
 
 UTROLIG TRIKS:
 Hvis et SD-kort er konka med skrivebeskyttelse ser det ut til at man kan redde det:
