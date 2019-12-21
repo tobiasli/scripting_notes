@@ -1,13 +1,17 @@
-# How to Install ArchLinuxArm on raspberry pi:
-1) Doanload image: https://sourceforge.net/projects/archlinux-rpi2/
-2) Write to sd-card with Win32DiskImager
-3) Stick in Pi and boot.
-4) login as alarm/alarm
-5) su root with root as password
-6) pacman -Syu --ignore ca-certificates-utils
-7) pacman-key --init
-8) pacman-key --populate archlinuxarm
-9) pacman -Syu
+### How to Install ArchLinuxArm on raspberry pi:
+* NB: With following guide, remember to download x64 version: http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
+* NB: With following guide, remember to run all commands as root.
+* NB: Finally add `arm_64bit=1` to `boot/config.txt`
+* Follow guide found via [archlinuxarm v8 for broadcom raspberry pi 3](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3).
+
+### Setup
+```
+pacman-key --init
+pacman-key populate archlinuxarm
+pacman -Syu
+pacman -S python
+pacman -S pip
+```
 
 ### start stop restart ssh:
 * `systemctl start sshd`
