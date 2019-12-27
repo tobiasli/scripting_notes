@@ -3,6 +3,9 @@
 * NB: With following guide, remember to run all commands as root.
 * NB: Finally add `arm_64bit=1` to `boot/config.txt`
 * Follow guide found via [archlinuxarm v8 for broadcom raspberry pi 3](https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3).
+* Note: boot/config.txt requires below lines to boot the RPI64bit kernel
+kernel=kernel8.img
+arm_64bit=1
 
 ### Setup
 ```
