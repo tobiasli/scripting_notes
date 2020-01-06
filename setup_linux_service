@@ -1,0 +1,38 @@
+# Notes regarding setting up a service on a linux server.
+
+How to setup services: https://www.golinuxcloud.com/beginners-guide-systemd-tutorial-linux/
+
+I have to create a Unit file describing the service I want to run and the criteria for 
+
+
+https://tecadmin.net/setup-autorun-python-script-using-systemd/
+
+The following service will start when startup is completed (but before user is logged in).
+
+[Unit]
+Description=DtssHost for collecting, storing and serving timeseries data.
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/bin/dtss_host_service.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+[Unit]
+Description=Data collection service collecting data from Netatmo.
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/bin/data_collection_netatmo.py
+StandardInput=tty-force
+
+[Install]
+WantedBy=multi-user.target
