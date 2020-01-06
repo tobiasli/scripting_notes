@@ -4,6 +4,7 @@ How to setup services: https://www.golinuxcloud.com/beginners-guide-systemd-tuto
 
 I have to create a Unit file describing the service I want to run and the criteria for 
 
+Created _shyft
 
 https://tecadmin.net/setup-autorun-python-script-using-systemd/
 
@@ -15,7 +16,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /usr/bin/dtss_host_service.py
+ExecStart=/usr/bin/python3 /usr/bin/start_dtss_host_service.py
 StandardInput=tty-force
 
 [Install]
@@ -31,7 +32,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /usr/bin/data_collection_netatmo.py
+ExecStart=/usr/bin/python3 /usr/bin/start_data_collection_netatmo.py
 StandardInput=tty-force
 
 [Install]
