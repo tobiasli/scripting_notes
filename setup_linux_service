@@ -8,8 +8,12 @@ Created _shyft
 
 https://tecadmin.net/setup-autorun-python-script-using-systemd/
 
-The following service will start when startup is completed (but before user is logged in).
+The following files define services that will start when startup is completed (but before user is logged in).
 
+Place the files in:
+/lib/systemd/system/
+
+dtss_host.service:
 [Unit]
 Description=DtssHost for collecting, storing and serving timeseries data.
 After=multi-user.target
@@ -25,10 +29,10 @@ WantedBy=multi-user.target
 
 
 
-
+data_collection_netatmo.service:
 [Unit]
 Description=Data collection service collecting data from Netatmo.
-After=multi-user.target
+After=dtss_host.service
 
 [Service]
 Type=simple
