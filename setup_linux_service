@@ -20,7 +20,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /usr/bin/start_dtss_host_service.py
+ExecStart=/_shyft/bin/python3 /home/shyft/start_dtss_host_service.py
 StandardInput=tty-force
 
 [Install]
@@ -36,7 +36,7 @@ After=dtss_host.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /usr/bin/start_data_collection_netatmo.py
+ExecStart=/_shyft/bin/python3 /usr/shyft/start_data_collection_netatmo.py
 StandardInput=tty-force
 
 [Install]
