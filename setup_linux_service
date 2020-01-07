@@ -4,14 +4,28 @@ How to setup services: https://www.golinuxcloud.com/beginners-guide-systemd-tuto
 
 I have to create a Unit file describing the service I want to run and the criteria for 
 
-Created _shyft
+## Creating an python environment.
+1) I need cryptography. This is only available in arm as python-cryptography. 
 
+`pacman -S python-cryptography`
+`pacman -S python-numpy`
+`pacman -S python-pytest`
+
+2) This only adds cryptography to global python. I need a venv which includes this global package.
+3) Create new env with `python -m venv shyft --system-site-packages`. This creates an env that has access to the global packaes.
+4) Any new packages installed will be limited to the venv.
+5) Installed shyft.
+6) Fix installation of weather module. Can't find packages.
+
+Created shyft
 https://tecadmin.net/setup-autorun-python-script-using-systemd/
 
 The following files define services that will start when startup is completed (but before user is logged in).
 
 Place the files in:
 /lib/systemd/system/
+
+Assumes that the correct env in venv is called _shyft.
 
 dtss_host.service:
 [Unit]
@@ -20,7 +34,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/_shyft/bin/python3 /home/shyft/start_dtss_host_service.py
+ExecStart=/_shyft/bin/python3.8 /home/shyft/start_dtss_host_service.py
 StandardInput=tty-force
 
 [Install]
@@ -36,8 +50,8 @@ After=dtss_host.service
 
 [Service]
 Type=simple
-ExecStart=/_shyft/bin/python3 /usr/shyft/start_data_collection_netatmo.py
+ExecStart=/_shyft/bin/python3.8 /usr/shyft/start_data_collection_netatmo.py
 StandardInput=tty-force
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=dtss_host.service
