@@ -15,7 +15,13 @@ I have to create a Unit file describing the service I want to run and the criter
 3) Create new env with `python -m venv shyft --system-site-packages`. This creates an env that has access to the global packaes.
 4) Any new packages installed will be limited to the venv.
 5) Installed shyft.
-6) Fix installation of weather module. Can't find packages.
+6) Fix installation of weather module. Can't find packages. DONE!
+7) Install packages, run tests, fix tests, run tests, pass!
+8) Add encrypted env vars, run tests, all pass!
+9) Create startup bash bash /home/shyft/config/weather_dtss_start.bash.
+10) I works!
+11) Create client from Pycharm terminal on laptop, send request to RPI. MUTHER FUCKING WORKS!
+12) Next, start parallell services for data collection and dtss_host.
 
 Created shyft
 https://tecadmin.net/setup-autorun-python-script-using-systemd/
