@@ -2,8 +2,10 @@
 
 import re
 
+# Regular expression pattern matching APA referenced author name:
 r = re.compile('(?:(?<=^)|(?<=, )(?:& )?)(?P<last_name>[A-Z-]\w+), (?P<initials>([A-Z]\. ?)+),?')
 
+# Reference list from master thesis (https://www.duo.uio.no/handle/10852/36909)
 reflist = '''
 Anderson, E. A. (1976). A point energy and mass balance model of a snow cover. NOAA
 Tech. Rep., 19.
@@ -199,14 +201,16 @@ and oceanic technology, 15(1), 54.
 Zhang, Y., Suzuki, K., Kadota, T., & Ohata, T. (2004). Sublimation from snow surface in
 southern mountain taiga of eastern Siberia. Journal of Geophysical Research, 109, 10.'''
 
+# Split into seperate lines:
 split = reflist.split('\n')
 
+# Match pattern to each line:
 matched = list()
 for string in split:
     if string:
         matched.extend([m for m in r.finditer(string)])
 
-# To dictionary:
+# Convert result matches to dictionary:
 authors = list()
 for g in matched:
     author = dict()
@@ -215,8 +219,9 @@ for g in matched:
     if not author in authors:
         authors.append(author)
 
-# Sort:
+# Sort authors by last name:
 authors = sorted(authors, key=lambda x: x['last_name'])
 
+# Print each author dictionary:
 for a in authors:
     print(a)
