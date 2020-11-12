@@ -1,0 +1,222 @@
+# Get a list of unique authors from an APA-styled reference list using regular expressions.
+
+import re
+
+r = re.compile('(?:(?<=^)|(?<=, )(?:& )?)(?P<last_name>[A-Z-]\w+), (?P<initials>([A-Z]\. ?)+),?')
+
+reflist = '''
+Anderson, E. A. (1976). A point energy and mass balance model of a snow cover. NOAA
+Tech. Rep., 19.
+Bernhardt, M., Liston, G. E., Strasser, U., Zängl, G., & Schulz, K. (2010). High resolution
+modelling of snow transport in complex terrain using downscaled MM5 wind fields.
+The Cryosphere, 4, 15.
+Bernhardt, M., Zängl, G., Liston, G. E., Strasser, U., & Mauser, W. (2009). Using wind fields
+from a high‐resolution atmospheric model for simulating snow dynamics in
+mountainous terrain. Hydrological processes, 23(7), 1064.
+Berthling, I., Eiken, T., & Sollid, J. L. (2001). Frost Heave and Thaw Consolidation of
+Ploughing Boulders in a Mid-Alpine Environment, Finse, Southern Norway.
+Permafrost and Periglacial Processes, 12, 12.
+Blöschl, G., Gutknecht, D., & Kirnbauer, R. (1991). Distributed snowmelt simulations in an
+alpine catchment. Water resources research, 27(12), 3171.
+Bruland, O., Liston, G. E., Vonk, J., Sand, K., & Killingtveit, Å. (2004). Modelling the snow
+distribution at two high arctic sites at Svalbard, Norway, and at an alpine site in
+central Norway. Nordic hydrology, 35(3), 191.
+Dadic, R., Mott, R., Lehning, M., & Burlando, P. (2010). Wind influence on snow depth
+distribution and accumulation over glaciers. Journal of Geophysical Research, 115, 8.
+Davis, J. L., & Annan, A. P. (1989). Ground-Penetrating Radar for High-Resolution Mapping
+of Soil and Rock Stratigraphy. Geophysical Prospecting, 37, 20.
+Dingman, S. L. (2002). Physical hydrology (2 ed.): Waveland Press, Inc.
+Dunse, T., Eisen, O., Helm, V., Rack, W., Steinhage, D., & Parry, V. (2008). Characteristics
+and small-scale variability of GPR signals and their relation to snow accumulation in
+Greenlands percolation zone. Journal of Glaciology, 54(185), 10.
+Erxleben, J., Elder, K., & Davis, R. (2002). Comparison of spatial interpolation methods for
+estimating snow distribution in the Colorado Rocky Mountains. Hydrological
+processes, 16(18), 3627.
+Essery, R., Samuel, M., Lajeune, Y., & Ménard, C. B. (2013). A comparison of 1701 snow
+models using observations from an apline site. Advances in Water Resources, 55, 17.
+Evans, S. (1965). Dielectric properties of ice and snow - a review. Journal of Glaciology,
+5(42), 19.
+Førland, E., Allerup, P., Dahlström, B., Elomaa, E., Jónsson, T., Madsen, H., . . . Vejen, F.
+(1996). Manual for Operational Correction of Nordic Precipitation Data. E. Førland
+(Ed.): The Norwegian Meteorological Institute. Report Nr. 24/96
+References Snow Redistribution Modelling in Alpine Norway
+76
+Galley, R. J., Trachtenberg, M., Langlois, A., Barber, D. G., & Shafai, L. (2009).
+Observations of geophysical and dielectric properties and ground penetrating radar
+signatures for discrimination of snow, sea ice and freshwater ice thickness. Cold
+Regions Science and Technology, 57(1), 29-38.
+Gascoin, S., Lhermitte, S., Kinnard, C., Bortels, K., & Liston, G. E. (2012). Wind effects on
+snow cover in Pascua-Lama, Dry Andes of Chile. Advances in Water Resources,
+55(2013), 14.
+Gauer, P. (2001). Numerical modeling of blowing and drifting snow in Alpine terrain.
+Journal of Glaciology, 47(156), 97.
+Giesen, R. H., & Oerlemans, J. (2010). Response of the ice cap Hardangerjøkulen in southern
+Norway to the 20th and 21st century climates. The Cryosphere, 4, 22.
+Greene, E. M., Liston, G. E., & Pielke, R. A. s. (1999). Simulation of above treeline snowdrift
+formation using a numerical snow-transport model. Cold regions science and
+technology, 30(1-3), 135.
+Harris, C. M., D.V., Isaksen, K., Haeberli, W. S., J.L., King, L., Holmlund, P., Francesco, D.,
+. . . Palacios, D. (2003). Warming permafrost in European mountains. Global and
+planetary change, 39(3-4), 215.
+Hasholt, B., Liston, G. E., & Knudsen, N. T. (2003). Snow-distribution modelling in the
+Ammassalik region, south east Greenland. Nordic hydrology, 34(1/2), 1.
+Heimstra, C. A., Liston, G. E., & Reiners, W. A. (2002). Snow Redistribution by Wind and
+Interactions with Vegetation at Upper Treeline in Medicine Bow Mountains,
+Wyoming, U.S.A. Arctic, Antarctic and Alpine Research, 34(3), 262-273.
+Jaedicke, C. (2003). Snow Mass Quantification and Avalanche Victim Search By Ground
+Penetrating Radar. Surveys in Geophysics, 24, 14.
+Jaedicke, C., & Sandvik, A. D. (2002). High resolution snow distribution data from complex
+Arctic terrain: a tool for model validation. Natural hazards and Earth System
+Sciences, 2, 8.
+Kind, R. J. (1992). One-Dimensional Aeolian Suspension Above Beds Of Loose Particles - A
+New Concentration-Profile Equation. Atmospheric Environment, 26A(5), 4.
+Kirnbauer, R., Blöschl, G., & Gutnecht, D. (1994). Entering the era of distributed snow
+models. Nordic hydrology, 25(1), 1.
+Kohler, J. C., Moore, J. C., Kennett, M., Engset, R., & Elvehøy, H. (1997). Using groundpentrating radar to image previous years summer sirfaces for mass-balance
+measurements. Annals of Glaciology, 24, 6.
+Kojima, K. (1967). Densification of seasonal snow cover. Physics of Snow and Ice:
+proceedings= 雪氷の物理学: 論文集, 1(2), 929-952.
+Snow Redistribution Modelling in Alpine Norway References
+77
+Kovacs, A., Gow, A. J., & Morey, R. M. (1995). The in-situ dielectric constant of polar firn
+revisited. Cold Regions Science and Technology, 23, 11.
+Lehning, M., Löwe, H., Ryser, M., & Raderschall, N. (2008). Inhomogeneous precipitation
+distribution and snow transport in steep terrain. Water Resources Research, 44, 19.
+Lehning, M., Völksch, I., Gustafsson, D., Nguyen, T. A., Stähli, M., & Zappa, M. (2006).
+ALPINE3D: a detailed model of mountain surface processes and its application to
+snow hydrology. Hydrological processes, 20(10), 2111.
+Lilleøren, K. S. H., O., Nesje, A., & Etzelmüller, B. (2013). Holocene development and
+geomorphic processes at Omnsbreen, southern Norway: Evidence for glacier–
+permafrost interactions. The Holocene, 0(0), 14.
+Liston, G. E. (1995). Local advection of momentum, heat, and moisture during the melt of
+patchy snow covers. Journal of applied meteorology, 34(7), 1705.
+Liston, G. E. (2012). Email: [Re: Questions regarding a study in Norway using SnowModel].
+Recieved: 20.09.2012. Can be found in Appendix E.1
+Liston, G. E. (2013). Email: [RE: Questions regarding SnowModel]. Recieved: 03.04.2013.
+Can be found in Appendix E.2
+Liston, G. E., & Elder, K. (2006a). A distributed snow-evolution modeling system
+(SnowModel). Journal of hydrometeorology, 7(6), 1259.
+Liston, G. E., & Elder, K. (2006b). A meteorological distribution system for high-resolution
+terrestrial modeling (MicroMet). Journal of hydrometeorology, 7(2), 217.
+Liston, G. E., Haehnel, R. B., Sturm, M., Heimstra, C. A., Berezovskaya, S., & Tabler, R. D.
+(2007). Instruments and methods: Simulating complex snow distributions in windy
+environments using SnowTran-3D. Journal of Glaciology, 53(181), 241.
+Liston, G. E., & Hall, D. K. (1995). An energy-balance model of lake-ice evolution. Journal
+of Glaciology, 41(138), 373.
+Liston, G. E., Heimstra, C. A., Elder, K., & Cline, D. W. (2008). Mesocell study area snow
+distributions for the Cold Land Processes Experiment (CLPX). Journal of
+hydrometeorology, 9(5), 957.
+Liston, G. E., McFadden, J. P., Sturm, M., & Pielke, R. A. s. (2002). Modelled changes in
+arctic tundra snow, energy and moisture fluxes due to increased shrubs. Global change
+biology, 8(1), 17.
+Liston, G. E., & Sturm, M. (1998). A snow-transport model for complex terrain. Journal of
+Glaciology, 44(148), 498.
+Liston, G. E., & Sturm, M. (2002). Winter precipitation patterns in arctic Alaska determined
+from a blowing-snow model and snow-depth observations. Journal of
+hydrometeorology, 3(6), 646.
+References Snow Redistribution Modelling in Alpine Norway
+78
+Liston, G. E., & Winther, J. G. (2005). Antarctic surface and subsurface snow and ice melt
+fluxes. Journal of Climate, 18(10), 1469.
+Liston, G. E., Winther, J. G., Bruland, O., Elvehøy, H., Sand, K., & Karlöf, L. (2000). Snow
+and blue-ice distribution patterns on the coastal Antarctic ice sheet. Antarctic science,
+12(01), 69.
+Malå Geoscience. (2012). Malå GPR ProEx System. Retrieved 20.11.2012, from
+http://www.malags.com/Products/MALA-ProEx-System
+Marchand, W. D., Bruland, O., & Killingtveit, Å. (2001). Improved Measurements and
+Analysis of Spatial Snow Cover by Combining a Ground Based Radar System With a
+Differential Global Positioning System Reciever. Nordic Hydrology, 32(3), 13.
+Marks, D., Domingo, J., Susong, D., Link, T., & Garen, D. (1999). A spatially distributed
+energy balance snowmelt model for application in mountain basins. Hydrological
+processes, 13(12-13), 1935-1959.
+Marsh, P. (1999). Snowcover formation and melt: recent advances and future prospects.
+Hydrological processes, 13(14-15), 2117.
+Matsuoka, K., Aoki, T., Yamamoto, T., & Naruse, R. (2003). Field-performance tests of a
+portable low frequency ice-penetrating radar and a ground-penetrating radar at
+Athabasca Glacier, Canadian Rockies. Bulletin of Glaciological Research, 20, 6.
+Mernild, S. H., Liston, G. E., Hiemstra, C. A., Christensen, J. H., Stendel, M., & Hasholt, B.
+(2011). Surface Mass Balance and Runoff Modeling Using HIRHAM4 RCM at
+Kangerlussuaq (Sondre Stromfjord), West Greenland, 1950-2080. Journal of Climate,
+24(3), 609-623.
+Mernild, S. H., Liston, G. E., Steffen, K., & Chylek, P. (2010). Meltwater flux and runoff
+modeling in the ablation area of Jakobshavn Isbræ, West Greenland. Journal of
+Glaciology, 56(195), 20.
+Mernild, S. H., Liston, G. E., van den Broeke, M., & Hasholt, B. (2010). Runoff and massbalance simulations from the Greenland Ice Sheet at Kangerlussuaq (Søndre
+Strømfjord) in a 30-year perspective, 1979-2008. The Cryosphere, 4(2), 231.
+met.no. (2012). Observing stations in operation. Retrieved 22.11.2012, from eklima.no
+Mott, R., Schirmer, M., Bavay, M., Grünewald, T., & Lehning, M. (2010). Understanding
+snow-transport processes shaping the mountain snow-cover. The Cryosphere, 4(4),
+545.
+Onset. (2012). Onset Computer Corporation. Retrieved 22.11.2012, from
+http://www.onsetcomp.com
+Pomeroy, J. W., & Gray, D. M. (1990). Saltation of Snow. Water Resources Research, 26(7),
+11.
+Snow Redistribution Modelling in Alpine Norway References
+79
+Prasad, R., Tarboton, D. G., Liston, G. E., & Luce, C. H. (2001). Testing a blowing snow
+model against distributed snow measurements at Upper Sheep Creek, Idaho, United
+States of America. Water resources research, 37(5), 1341.
+Reynolds, J. M. (2011). An Introduction to Applied and Environmental Geophysics.
+Richardson, C., Aarholt, E., Hamran, S. E., Holmlund, P., & Isaksson, E. (1997). Spatial
+distribution of snow in western Dronning Maud Land, East Antarctica, mapped by a
+ground-based snow radar. Journal of Geophysical Research, 102(B9), 11.
+Sand, K., & Bruland, O. (1998). Application of Georadar for Snow Cover Surveying. Nordic
+Hydrology, 29(4/5), 9.
+Sandmeier Scientific Software. (2012). Reflexw. Retrieved 20.11.2012, from
+http://www.sandmeier-geo.de
+seNorge.no. (2013). Snow, weather, water and climate in Norway. Retrieved 28.03.2013,
+from www.senorge.no
+Serma, A. I. A., & Setan, H. (2009). Ground Penetrating Radar (GPR) for Subsurface
+Mapping: Preliminary Result. Geoinformation Science Journal, 9(2), 18.
+Sinisalo, A., Grinsted, A., Moore, J. C., Kärkäs, E., & Pettersson, R. (2003). SnowAccumulation studies in Antarctica with ground-penetrating radar using 50, 100 and
+800 antenna frequencies. Annals of Glaciology, 37, 5.
+Store Norske Leksikon. (2012). Hardangervidda. Retrieved 20.02.2013, from
+http://snl.no/Hardangervidda
+Sømme, L., & Østbye, E. (1997). Høyfjellsøkologisk forskningsstasjons historie. Finse - Et
+senter for høyfjellsforskning, 56.
+Tabler, R. D. (1975a). Estimating the transport and evaporation of blowing snow. Research
+Committee Great Plains Agricultural Council, 73, 85-104.
+Tabler, R. D. (1975b). Predicting Profiles Of Snowdrifts in Topographic Catchments. Paper
+presented at the Western Snow Conference, Coronado, California.
+Tarboton, D. G., Chowdhury, T. G., & Jackson, T. H. (1994). A Spatially Distributed Energy
+Balance Snowmelt Model. Proceedings of Symposium in Biogeochemestry of
+Seasonally Snow Covered Catchments.
+Taurisano, A., Schuler, T. V., Hagen, J. O., Eiken, T., Loe, E., Melvold, K., & Kohler, J. C.
+(2007). The distribution of snow accumulation across the Austfonna ice cap, Svalbard:
+direct measurements and modelling. Polar Research, 26, 6.
+Uematsu, T., Nakata, T., Takeuchi, K., Arisawa, Y., & Kaneda, Y. (1991). Three-dimensional
+numerical simulation of snowdrift. Cold regions science and technology, 20(1), 65-73.
+Winstral, A., Marks, D., & Gurney, R. (2013). Simulating wind-affected snow accumulations
+at catchment to basin scales. Advances in Water Resources, 55, 15.
+References Snow Redistribution Modelling in Alpine Norway
+80
+Yamamoto, T., Matsuoka, K., & Naruse, R. (2004). Observation of internal structures of snow
+covers with a ground-penetrating radar. Annals of Glaciology, 38, 4.
+Yang, D., Goodison, B. E., Metcalfe, J. R., Golubev, V. S., Bates, R., Pangburn, T., &
+Hanson, C. L. (1996). Accuracy of NWS 8" Standard Nonrecording Precipitation
+Gauge: Results and Application of WMO Intercomparison. Journal of atmospheric
+and oceanic technology, 15(1), 54.
+Zhang, Y., Suzuki, K., Kadota, T., & Ohata, T. (2004). Sublimation from snow surface in
+southern mountain taiga of eastern Siberia. Journal of Geophysical Research, 109, 10.'''
+
+split = reflist.split('\n')
+
+matched = list()
+for string in split:
+    if string:
+        matched.extend([m for m in r.finditer(string)])
+
+# To dictionary:
+authors = list()
+for g in matched:
+    author = dict()
+    for key, value in g.groupdict().items():
+        author[key] = value.strip()
+    if not author in authors:
+        authors.append(author)
+
+# Sort:
+authors = sorted(authors, key=lambda x: x['last_name'])
+
+for a in authors:
+    print(a)
