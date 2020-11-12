@@ -6,7 +6,7 @@ import re
 author_pattern = re.compile('(?:(?<=^)|(?<=, )(?:& )?)(?P<last_name>[A-Z-]\w+), (?P<initials>([A-Z]\. ?)+),?')
 
 # Regular expression pattern for matching APA referenced year and title (not perfect).
-year_title_pattern = re.compile('\((?P<year>\d+)\)\. (?P<title>.*?\.?)')
+year_title_pattern = re.compile('\((?P<year>\d+)\)\. (?P<title>.*?)(?:(?=\.)|(?=$))')
 
 # Reference list from master thesis (https://www.duo.uio.no/handle/10852/36909)
 reflist = '''
