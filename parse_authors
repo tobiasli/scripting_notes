@@ -1,10 +1,12 @@
 # Get a list of unique authors from an APA-styled reference list using regular expressions.
 
-# Import regular expressions library:
 import re
 
 # Regular expression pattern matching APA referenced author name:
-r = re.compile('(?:(?<=^)|(?<=, )(?:& )?)(?P<last_name>[A-Z-]\w+), (?P<initials>([A-Z]\. ?)+),?')
+author_pattern = re.compile('(?:(?<=^)|(?<=, )(?:& )?)(?P<last_name>[A-Z-]\w+), (?P<initials>([A-Z]\. ?)+),?')
+
+# Regular expression pattern for matching APA referenced year and title (not perfect).
+year_title_pattern = re.compile('\((?P<year>\d+)\)\. (?P<title>.*?\.?)')
 
 # Reference list from master thesis (https://www.duo.uio.no/handle/10852/36909)
 reflist = '''
@@ -205,24 +207,40 @@ southern mountain taiga of eastern Siberia. Journal of Geophysical Research, 109
 # Split into seperate lines:
 split = reflist.split('\n')
 
-# Match pattern to each line:
+# Match patterns to each line:
 matched = list()
+articles = list()
 for string in split:
-    if string:
-        matched.extend([m for m in r.finditer(string)])
+    if string: # If the string is not empty.
 
-# Convert result matches to dictionary:
-authors = list()
-for g in matched:
-    author = dict()
-    for key, value in g.groupdict().items():
-        author[key] = value.strip()
-    if not author in authors:
-        authors.append(author)
+        authors = [m.groupdict() for m in author_pattern.finditer(string)]
+        if authors: # if we found some authors.
+            # Clean up authors:
+            for author in authors:
+                for key, value in author.items():
+                    author[key] = value.strip()
+            meta = [m for m in year_title_pattern.finditer(string)]
+
+            if meta: # If we also found some metadata (year, title)
+                d = meta[0].groupdict()
+                d['authors'] = authors
+
+                matched.extend(authors)
+                articles.append(d)
+
+# Remove duplicate authors:
+unique_authors = list()
+for author in matched:
+    if not author in unique_authors:
+        unique_authors.append(author)
 
 # Sort authors by last name:
-authors = sorted(authors, key=lambda x: x['last_name'])
+unique_authors = sorted(unique_authors, key=lambda x: x['last_name'])
 
 # Print each author dictionary:
-for a in authors:
+for a in unique_authors:
     print(a)
+
+# Print each article dictionary:
+for art in articles:
+    print(art)
