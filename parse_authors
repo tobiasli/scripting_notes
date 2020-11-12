@@ -1,5 +1,6 @@
 # Get a list of unique authors from an APA-styled reference list using regular expressions.
 
+# Import regular expressions library:
 import re
 
 # Regular expression pattern matching APA referenced author name:
